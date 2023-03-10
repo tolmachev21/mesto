@@ -1,0 +1,16 @@
+.place__select {
+    margin: 0;
+    width: 22px;
+    height: 19px;
+    padding: 5px 5px 1px 0;
+    border: 0;
+    background: url(../../../images/Vector-love.svg) no-repeat center;
+}
+
+.place__select:hover {
+    background-image: url(../../../images/Vector-love_hover.svg);
+}
+
+.place__select:active {
+    background-image: url(../../../images/Vector-love-active.png);
+}
