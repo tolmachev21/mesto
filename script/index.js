@@ -11,9 +11,9 @@ const closePopup = function() {
 }
 
 const formElement = popupElement.querySelector('.popup__form');
-const formSubmitElement = formElement.querySelector('.popup__form_submit-button');
-const nameInputElement = formElement.querySelector('.popup__form_input_name');
-const jobInputElement = formElement.querySelector('.popup__form_input_job');
+const formSubmitElement = formElement.querySelector('.popup__fieldset_submit-button');
+const nameInputElement = formElement.querySelector('.popup__fieldset_field_name');
+const jobInputElement = formElement.querySelector('.popup__fieldset_field_job');
 
 function handleFormSubmit (event) {
     event.preventDefault();
