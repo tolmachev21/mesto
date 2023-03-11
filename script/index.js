@@ -10,9 +10,6 @@ const closePopup = function() {
     popupElement.classList.remove('popup_opened');
 }
 
-popupOpenButtonElement.addEventListener('click', openPopup);
-popupCloseButtonElement.addEventListener('click', closePopup);
-
 const formElement = popupElement.querySelector('.popup__form');
 const formSubmitElement = formElement.querySelector('.popup__form_submit-button');
 const nameInputElement = formElement.querySelector('.popup__form_input_name');
@@ -29,8 +26,6 @@ function handleFormSubmit (event) {
     closePopup();
 }; 
 
-formElement.addEventListener('submit', handleFormSubmit);
-
 const closePopupByClickOnOverlay = function (event) {
     if (event.target !== event.currentTarget) {
         return;
@@ -38,4 +33,7 @@ const closePopupByClickOnOverlay = function (event) {
     closePopup();
 }
 
+popupOpenButtonElement.addEventListener('click', openPopup);
+popupCloseButtonElement.addEventListener('click', closePopup);
 popupElement.addEventListener('click', closePopupByClickOnOverlay);
+formElement.addEventListener('submit', handleFormSubmit);
