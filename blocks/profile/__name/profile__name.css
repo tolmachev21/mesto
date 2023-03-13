@@ -16,10 +16,10 @@
 
 @media screen and (max-width: 730px) {
     .profile__name {
+        margin: 0 0 0 auto;
         max-width: 189px;
-        padding: 0 0 0 46px;
         font-size: 27px;
         line-height: 33px;
-        text-align: center;
+        text-align: end;
     }
 }

@@ -18,6 +18,7 @@
     .profile__job {
         margin: 0 auto;
         max-width: 282px;
+        padding: 14px 0 0 0;
         font-size: 14px;
         line-height: 17px;
         text-align: center;

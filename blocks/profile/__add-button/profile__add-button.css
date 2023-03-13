@@ -7,7 +7,7 @@
     border: 2px solid rgba(255, 255, 255, 1);
     border-radius: 2px;
     cursor: pointer;
-    background: url(../../../images/Vector-add-button.png) no-repeat center;
+    background: url(../../../images/Vector-add-button.svg) no-repeat center;
     background-size: 24px;
 }
 
@@ -19,7 +19,6 @@
     .profile__add-button {
         margin: 0;
         width: 286px;
-        height: 54px;
         padding: 17px 133px;
         background-size: 16px;
     }
