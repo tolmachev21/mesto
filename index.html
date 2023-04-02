@@ -23,67 +23,56 @@
             <button type="button" class="profile__add-button" aria-label="Добавить картинку"></button>
         </section>
 
-        <section class="places" aria-label="Сетка с картинками">
-            <article class="place">
-                <img class="place__image" src="images/karachaevsk.jpg" alt="Карачаевск">
-                <div class="place__caption">
-                    <h3 class="place__title">Карачаевск</h3>
-                    <button type="button" class="place__select" aria-label="Положить в избранное"></button>
-                </div> 
-            </article>
-            <article class="place">
-                <img class="place__image" src="images/elbrus.jpg" alt="Гора Эльбрус"> 
-                <div class="place__caption">
-                    <h3 class="place__title">Гора Эльбрус</h3>
-                    <button type="button" class="place__select" aria-label="Положить в избранное"></button>
-                </div>  
-            </article>
-            <article class="place">
-                <img class="place__image" src="images/dombay.jpg" alt="Домбай">
-                <div class="place__caption"> 
-                    <h3 class="place__title">Домбай</h3>
-                    <button type="button" class="place__select" aria-label="Положить в избранное"></button>
-                </div>    
-            </article>
-            <article class="place">
-                <img class="place__image" src="images/karachaevsk.jpg" alt="Карачаевск">
-                <div class="place__caption"> 
-                    <h3 class="place__title">Карачаевск</h3>
-                    <button type="button" class="place__select" aria-label="Положить в избранное"></button>
-                </div>    
-            </article>
-            <article class="place">
-                <img class="place__image" src="images/elbrus.jpg" alt="Гора Эльбрус">
-                <div class="place__caption">
-                    <h3 class="place__title">Гора Эльбрус</h3>
-                    <button type="button" class="place__select" aria-label="Положить в избранное"></button>
-                </div> 
-            </article>
-            <article class="place">
-                <img class="place__image" src="images/dombay.jpg" alt="Домбай">
-                <div class="place__caption"> 
-                    <h3 class="place__title">Домбай</h3>
-                    <button type="button" class="place__select" aria-label="Положить в избранное"></button>
-                </div>    
-            </article>
-        </section>
+        <section class="places" aria-label="Сетка с картинками"></section>
     </main>
 
     <footer class="footer">
         <p class="footer__copyright">&copy;&nbsp;2023 Mesto Russia</p>
     </footer>
 
-    <div class="popup">
+    <div class="popup popup-edit-profile">
         <div class="popup__container">
-            <button type="button" class="popup__close-button" aria-label="Закрыть редактирование профиля"></button>
+            <button class="popup__close-button" type="button" aria-label="Закрыть редактирование профиля"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
             <form class="popup__form" name="profile-form">
-                <input class="popup__input popup__input_field_name" type="text" name="profile-name" value="Жак-Ив Кусто" placeholder="Введите имя">
-                <input class="popup__input popup__input_field_job" type="text" name="profile-job" value="Исследователь океана" placeholder="Введите свою профессию">
+                <input class="popup__input popup__input_field_name" type="text" name="profile-name" value="" placeholder="Введите имя">
+                <input class="popup__input popup__input_field_job" type="text" name="profile-job" value="" placeholder="Введите свою профессию">
                 <button class="popup__submit-button" type="submit">Сохранить</button>
             </form>
         </div>
     </div>
+    
+    <div class="popup popup-add-card">
+        <div class="popup__container">
+            <button class="popup__close-button" type="button" aria-label="Закрыть добавление картинки"></button>
+            <h2 class="popup__title">Новое место</h2>
+            <form class="popup__form" name="profile-form">
+                <input class="popup__input popup__input_field_place" type="text" name="card-place" value="" placeholder="Название">
+                <input class="popup__input popup__input_field_link" type="url" name="card-link" value="" placeholder="Ссылка на картинку">
+                <button class="popup__submit-button" type="submit">Сохранить</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="popup-fullscreen">
+        <div class="popup-fullscreen__container">
+            <button class="popup-fullscreen__close-button" type="button" aria-label="Закрыть открытую картинку"></button>
+            <img  class="popup-fullscreen__image" src="" alt="Картинка на весь экран">
+            <p class="popup-fullscreen__title"></p>
+        </div>
+    </div>
+
+    <template class="template__item">
+        <article class="place">
+            <img class="place__image" src="" alt="">
+            <button class="place__trash" type="button"  aria-label="Удалить"></button>
+            <div class="place__caption"> 
+                <h3 class="place__title"></h3>
+                <img class="place__select" src="images/Vector-love.svg" alt="Положить в избранное">
+            </div>    
+        </article>
+    </template>
+
     <script src="./script/index.js"></script>
 </body>
 </html>

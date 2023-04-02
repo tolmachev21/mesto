@@ -10,9 +10,5 @@
 }
 
 .place__select:hover {
-    background: url(../../../images/Vector-love_hover.svg) no-repeat center / cover;
-}
-
-.place__select:active {
-    background: url(../../../images/Vector-love_active.svg) no-repeat center / cover;
+    opacity: 0.5;
 }
