@@ -24,10 +24,12 @@ const places = document.querySelector('.places');
 
 // Переменные для функции полноэкранного просмотра картинок
 const popupFullScreenElement = document.querySelector('.popup-fullscreen');
-const popupFullScreenCloseButtonElement = popupFullScreenElement.querySelector('.popup-fullscreen__close-button');
+const popupFullScreenCloseButtonElement = popupFullScreenElement.querySelector('.popup__close-button');
 const popupFullScreenImageElement = popupFullScreenElement.querySelector('.popup-fullscreen__image');
 const popupFullScreenTitleElement = popupFullScreenElement.querySelector('.popup-fullscreen__title');
 
+// Переменная для всех кнопок-кретистиков
+const buttonCloseList =  document.querySelectorAll('.popup__close-button');
 
 // Универсальные функции открытия и закрытия попапов
 function openPopup (popup) {
@@ -52,7 +54,7 @@ function openAddCardPopup () {
 };
 
 function openFullScreenPopup () {
-  popupFullScreenElement.classList.add('popup-fullscreen_opened');
+  openPopup(popupFullScreenElement);
 };
 
 // Специальные функции для закрытия каждого попапа
@@ -65,7 +67,7 @@ function closeAddCardPopup () {
 };
 
 function closeFullScreenPopup () {
-  popupFullScreenElement.classList.remove('popup-fullscreen_opened');
+  closePopup(popupFullScreenElement);
 };
 
 // Закрытие попапов по клику на оверлей
@@ -95,7 +97,7 @@ function createCard (newCard) {
   const itemCard = itemTemplate.cloneNode(true);
   itemCard.querySelector('.place__title').textContent = newCard.name;
   itemCard.querySelector('.place__image').src = newCard.link;
-  setEventListener(itemCard);
+  setEventListenerForCards(itemCard);
   itemCard.querySelector('.place__image').addEventListener('click', () => openFullScreen(newCard));
   return itemCard;
 }; 
@@ -120,16 +122,10 @@ function openFullScreen (newCard) {
   openFullScreenPopup();
 };
 
-// Функция слушателей для первоначальных карточек
-function setEventListener (itemCard) {
+// Функция слушателей всех событий для каждой карточки
+function setEventListenerForCards (itemCard) {
   itemCard.querySelector('.place__trash').addEventListener('click', handleDelete);
   itemCard.querySelector('.place__select').addEventListener('click', selectCard);
-};
-
-// Функция слушателей для добавленных карточек
-function setEventListenerForAddCard (addNewCard) {
-  addNewCard.querySelector('.place__trash').addEventListener('click', handleDelete);
-  addNewCard.querySelector('.place__select').addEventListener('click', selectCard);
 };
 
 // Функция обрабочтика формы редактирования профиля
@@ -155,15 +151,12 @@ function handleFormAddCardSubmit (event) {
 popupEditProfileOpenButtonElement.addEventListener('click', openEditProfilePopup);
 popupAddCardOpenButtonElement.addEventListener('click', openAddCardPopup);
 
-// Слушатели на закрытие попапов
-popupEditProfileCloseButtonElement.addEventListener('click', closeEditPorfilePopup);
-popupAddCardCloseButtonElement.addEventListener('click', closeAddCardPopup);
-popupFullScreenCloseButtonElement.addEventListener('click', closeFullScreenPopup);
-
-// Слушатели на закрытие попапов при клике на оверлей
-popupEditProfileElement.addEventListener('click', closePopupByClickOnOverlay);
-popupAddCardElement.addEventListener('click', closePopupByClickOnOverlay);
-popupFullScreenElement.addEventListener('click', closePopupByClickOnOverlay);
+// Единый слушать на зактие всех попапов (кнопкой-крестиком и оверлеем)
+buttonCloseList.forEach(button => {
+  const popup = button.closest('.popup');
+  popup.addEventListener('mousedown', closePopupByClickOnOverlay);
+  button.addEventListener('click', () => closePopup(popup));
+});
 
 // Слушатели отправки формы
 formEditProfileElement.addEventListener('submit', handleFormEditProfileSubmit);
