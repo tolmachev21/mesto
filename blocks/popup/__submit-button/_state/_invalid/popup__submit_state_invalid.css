@@ -1,0 +1,5 @@
+.popup__submit_state_inactive {
+    background-color: rgba(0,0,0,0);
+    color: #D9D9D9;
+    border: 1px solid #D9D9D9;
+}

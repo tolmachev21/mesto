@@ -29,7 +29,7 @@ const popupFullScreenImageElement = popupFullScreenElement.querySelector('.popup
 const popupFullScreenTitleElement = popupFullScreenElement.querySelector('.popup-fullscreen__title');
 
 // Переменная для всех кнопок-кретистиков
-const buttonCloseList =  document.querySelectorAll('.popup__close-button');
+const buttonCloseList = document.querySelectorAll('.popup__close-button');
 
 // Универсальные функции открытия и закрытия попапов
 function openPopup (popup) {
@@ -53,10 +53,6 @@ function openAddCardPopup () {
   openPopup(popupAddCardElement);
 };
 
-function openFullScreenPopup () {
-  openPopup(popupFullScreenElement);
-};
-
 // Специальные функции для закрытия каждого попапа
 function closeEditPorfilePopup () {
   closePopup(popupEditProfileElement);
@@ -70,12 +66,19 @@ function closeFullScreenPopup () {
   closePopup(popupFullScreenElement);
 };
 
-// Закрытие попапов по клику на оверлей
+// Закрытие попапов по клику на оверлей и на клавишу ESC
 function closePopupByClickOnOverlay (event) {
   if (event.target !== event.currentTarget) {
     return;
   };
   closePopup(event.target);
+};
+
+function closePopupByClickOnKeyEsape (event) {
+  const popupOpen = document.querySelector('.popup_opened');
+  if (event.key === 'Escape') {
+    closePopup(popupOpen);
+  };  
 };
 
 // Добавление первоначальных карточек из массива с данными
@@ -119,7 +122,7 @@ function openFullScreen (newCard) {
   popupFullScreenImageElement.src = newCard.link;
   popupFullScreenTitleElement.textContent = newCard.name;
   popupFullScreenImageElement.alt = newCard.name;
-  openFullScreenPopup();
+  openPopup(popupFullScreenElement);
 };
 
 // Функция слушателей всех событий для каждой карточки
@@ -151,12 +154,14 @@ function handleFormAddCardSubmit (event) {
 popupEditProfileOpenButtonElement.addEventListener('click', openEditProfilePopup);
 popupAddCardOpenButtonElement.addEventListener('click', openAddCardPopup);
 
-// Единый слушать на зактие всех попапов (кнопкой-крестиком и оверлеем)
+// Единый слушать на закрытие всех попапов (кнопкой-крестиком и оверлеем)
 buttonCloseList.forEach(button => {
   const popup = button.closest('.popup');
   popup.addEventListener('mousedown', closePopupByClickOnOverlay);
   button.addEventListener('click', () => closePopup(popup));
 });
+
+document.addEventListener('keydown', closePopupByClickOnKeyEsape)
 
 // Слушатели отправки формы
 formEditProfileElement.addEventListener('submit', handleFormEditProfileSubmit);

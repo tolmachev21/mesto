@@ -1,0 +1,5 @@
+.popup__error {
+    padding: 5px 0 13px;
+    color: #FF0000;
+    min-height: 12px;
+}
