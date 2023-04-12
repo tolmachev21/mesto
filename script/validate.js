@@ -11,7 +11,7 @@ const enableValidationConfig = {
 const enableValidation = ({formSelector, ...rest}) => {
   const forms = Array.from(document.querySelectorAll(formSelector));
   forms.forEach(form => {
-      setEventListenerForForm(form, rest);
+    setEventListenerForForm(form, rest);
   });
 };
 

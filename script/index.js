@@ -19,7 +19,7 @@ const inputPlaceElement = formAddCardElement.querySelector('.popup__input_field_
 const inputLinkElement = formAddCardElement.querySelector('.popup__input_field_link');
 
 // Переменные для функции создания карточек 
-const itemTemplate = document.querySelector('.template__item').content; 
+const itemTemplate = document.querySelector('.template__item').content.querySelector('.place');
 const places = document.querySelector('.places');
 
 // Переменные для функции полноэкранного просмотра картинок
@@ -34,20 +34,24 @@ const buttonCloseList = document.querySelectorAll('.popup__close-button');
 // Универсальные функции открытия и закрытия попапов
 function openPopup (popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupByClickOnKeyEsape);
 };
 
 function closePopup (popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupByClickOnKeyEsape);
 };
 
 // Специальные функции для открытия каждого попапа 
 function openEditProfilePopup () {
+  disableButton(formSubmitEditProfileElement, {invalidButtonClass: enableValidationConfig.invalidButtonClass, validButtonClass: enableValidationConfig.validButtonClass});
   inputNameElement.value = profileNameElement.textContent;
   inputJobElement.value = profileJobElement.textContent;
   openPopup(popupEditProfileElement);
 };
 
 function openAddCardPopup () {
+  disableButton(formSubmitAddCardElement, {invalidButtonClass: enableValidationConfig.invalidButtonClass, validButtonClass: enableValidationConfig.validButtonClass});
   inputPlaceElement.value = '';
   inputLinkElement.value = '';
   openPopup(popupAddCardElement);
@@ -75,8 +79,8 @@ function closePopupByClickOnOverlay (event) {
 };
 
 function closePopupByClickOnKeyEsape (event) {
-  const popupOpen = document.querySelector('.popup_opened');
   if (event.key === 'Escape') {
+    const popupOpen = document.querySelector('.popup_opened');
     closePopup(popupOpen);
   };  
 };
@@ -160,8 +164,6 @@ buttonCloseList.forEach(button => {
   popup.addEventListener('mousedown', closePopupByClickOnOverlay);
   button.addEventListener('click', () => closePopup(popup));
 });
-
-document.addEventListener('keydown', closePopupByClickOnKeyEsape)
 
 // Слушатели отправки формы
 formEditProfileElement.addEventListener('submit', handleFormEditProfileSubmit);
