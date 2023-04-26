@@ -1,4 +1,4 @@
-.popup-fullscreen__title {
+.popup__subtitle {
     margin: 0;
     max-width: 291px;
     padding: 10px 0 0;
@@ -16,7 +16,7 @@
 }
 
 @media screen and (max-width: 730px) {
-    .popup-fullscreen__title {
+    .popup__subtitle {
         max-width: 240px;
     }
 }

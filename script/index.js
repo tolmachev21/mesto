@@ -23,6 +23,11 @@ const places = document.querySelector('.places');
 // Переменная для всех кнопок-кретистиков
 const buttonCloseList = document.querySelectorAll('.popup__close-button');
 
+// Переменные для функции полноэкранного просмотра картинок
+const popupFullScreenElement = document.querySelector('.popup-fullscreen');
+const popupFullScreenImageElement = popupFullScreenElement.querySelector('.popup__image');
+const popupFullScreenTitleElement = popupFullScreenElement.querySelector('.popup__subtitle');
+
 // 
 const ValidationConfig = {
   formSelector: '.popup__form',
@@ -67,18 +72,20 @@ const initialCards = [
   }
 ];
 
+// Создание карточки
+function createCard(card) {
+  const cardElement = new Card(card, '.template__item');
+  return cardElement.generateCard();
+};
+
 // Вставка первоначальных карточек из массива с данными
 initialCards.forEach((defaultCard) => {
-  const card = new Card(defaultCard, '.template__item');
-  const cardElement = card.generateCard();
-  places.append(cardElement);
+  places.append(createCard(defaultCard));
 });
 
 // Вставка добавленных карточек через форму-добавления 
 function renderAddedCard (newCard) {
-  const card = new Card(newCard, '.template__item');
-  const cardElement = card.generateCard();
-  places.prepend(cardElement);
+  places.prepend(createCard(newCard));
 };
 
 // Универсальные функции открытия и закрытия попапов
@@ -153,3 +160,5 @@ buttonCloseList.forEach(button => {
 // Слушатели отправки формы
 formEditProfileElement.addEventListener('submit', handleFormEditProfileSubmit);
 formAddCardElement.addEventListener('submit', handleFormAddCardSubmit);
+
+export {popupFullScreenElement, popupFullScreenImageElement, popupFullScreenTitleElement, openPopup}

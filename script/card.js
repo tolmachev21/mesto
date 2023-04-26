@@ -1,3 +1,5 @@
+import {popupFullScreenElement, popupFullScreenImageElement, popupFullScreenTitleElement, openPopup} from './index.js';
+
 class Card {
   constructor(data, templateSelector) {
     this._templateSelector = templateSelector;
@@ -16,16 +18,15 @@ class Card {
   };
 
   _openFullScreen() {
-    const popupFullscreen = document.querySelector('.popup-fullscreen');
-    popupFullscreen.querySelector('.popup-fullscreen__image').src = this._image;
-    popupFullscreen.querySelector('.popup-fullscreen__title').textContent = this._title;
-    popupFullscreen.querySelector('.popup-fullscreen__image').alt = this._title;
-    popupFullscreen.classList.add('popup_opened');
+    popupFullScreenImageElement.src = this._image;
+    popupFullScreenTitleElement.textContent = this._title;
+    popupFullScreenImageElement.alt = this._title;
+    openPopup(popupFullScreenElement);
   };
 
-  _handlerDeleteCard(event) {
-    const trash = event.target.closest('.place');
-    trash.remove();
+  _handlerDeleteCard() {
+    this._element.remove();
+    this._element = null;
   };
 
   _handlerSelectCard(event) {
