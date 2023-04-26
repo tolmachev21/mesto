@@ -1,61 +1,65 @@
-const enableValidationConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__submit-button',
-  invalidButtonClass: 'popup__submit-button_state_invalid',
-  validButtonClass: 'popup__submit-button_state_valid',
-  inputErrorClass: 'popup__input_type_error'
-}; 
+class FormValidator {
+  constructor(validationConfig, validationForm) {
+    this._formSelector = validationConfig.formSelector;
+    this._inputSelector = validationConfig.inputSelector;
+    this._submitButtonSelector = validationConfig.submitButtonSelector; 
+    this._invalidButtonClass = validationConfig.invalidButtonClass;
+    this._validButtonClass = validationConfig.validButtonClass;
+    this._inputErrorClass = validationConfig.inputErrorClass;
+    this._form = validationForm;
+    this._formInputs = Array.from(this._form.querySelectorAll(this._inputSelector));
+    this._formButton = this._form.querySelector(this._submitButtonSelector);
+  };
 
-// Валидация формы 
-const enableValidation = ({formSelector, ...rest}) => {
-  const forms = Array.from(document.querySelectorAll(formSelector));
-  forms.forEach(form => {
-    setEventListenerForForm(form, rest);
-  });
-};
-
-const setEventListenerForForm = (formToValidate, {inputSelector, submitButtonSelector, ...rest}) => {
-  const formInputs = Array.from(formToValidate.querySelectorAll(inputSelector));
-  const formButton = formToValidate.querySelector(submitButtonSelector);
-  disableButton(formButton, rest);
-  formInputs.forEach((input) => {
+  _setEventListenerForForm() {
+    this._disableButton(this._formButton);
+    this._formInputs.forEach((input) => {
       input.addEventListener('input', () => {
-      checkInputValidity(input, rest);
-      if (hasInvalidInput(formInputs)) {
-          disableButton(formButton, rest);
-      } else {
-          enableButton(formButton, rest);
-      }
+        this._checkInputValidity(input);
+        if (this._hasInvalidInput(this._formInputs)) {
+          this._disableButton(this._formButton);
+        } else {
+          this._enableButton(this._formButton);
+        };
       });
-  });
-};
+    });
+  };
 
-const checkInputValidity = (input, {inputErrorClass}) => {
-  const currentInputErrorContainer = document.querySelector(`#${input.id}-error`);
-  if (input.checkValidity()) {
+  _checkInputValidity(input) {
+    const currentInputErrorContainer = document.querySelector(`#${input.id}-error`);
+    if (input.checkValidity()) {
       currentInputErrorContainer.textContent = "";
-      input.classList.remove(inputErrorClass);
-  } else {
+      input.classList.remove(this._inputErrorClass);
+    } else {
       currentInputErrorContainer.textContent = input.validationMessage;
-      input.classList.add(inputErrorClass);
+      input.classList.add(this._inputErrorClass);
+    };
+  };
+
+  _hasInvalidInput() {
+    return this._formInputs.some(item => !item.checkValidity());
+  };
+
+  _disableButton() {
+    this._formButton.classList.add(this._invalidButtonClass);
+    this._formButton.classList.remove(this._validButtonClass);
+    this._formButton.setAttribute('disabled', true);
+  };
+
+  _enableButton() {
+    this._formButton.classList.remove(this._invalidButtonClass);
+    this._formButton.classList.add(this._validButtonClass);
+    this._formButton.removeAttribute('disabled', true);
+  };
+
+
+  enableValidation() {
+    this._form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      this._disableButton(this._formButton);
+    })
+    this._setEventListenerForForm();
   };
 };
 
-const hasInvalidInput = (formInputs) => {
-  return formInputs.some(item => !item.checkValidity());
-};
-
-const disableButton = (button, {invalidButtonClass, validButtonClass}) => {
-  button.classList.add(invalidButtonClass);
-  button.classList.remove(validButtonClass);
-  button.setAttribute('disabled', true);
-};
-
-const enableButton = (button, {invalidButtonClass, validButtonClass}) => {
-  button.classList.remove(invalidButtonClass);
-  button.classList.add(validButtonClass);
-  button.removeAttribute('disabled', true);
-};
-
-enableValidation(enableValidationConfig);
+export {FormValidator};
