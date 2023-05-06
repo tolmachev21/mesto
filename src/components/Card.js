@@ -1,10 +1,9 @@
-import {popupFullScreenElement, popupFullScreenImageElement, popupFullScreenTitleElement, openPopup} from './index.js';
-
-class Card {
-  constructor(data, templateSelector) {
+export default class Card {
+  constructor(data, templateSelector, handleCardClick) {
     this._templateSelector = templateSelector;
     this._title = data.name;
     this._image = data.link;
+    this._handleCardClick = handleCardClick;
   };
 
   _getTemplate() {
@@ -15,13 +14,6 @@ class Card {
       .cloneNode(true);
 
       return cardTemplateElement;
-  };
-
-  _openFullScreen() {
-    popupFullScreenImageElement.src = this._image;
-    popupFullScreenTitleElement.textContent = this._title;
-    popupFullScreenImageElement.alt = this._title;
-    openPopup(popupFullScreenElement);
   };
 
   _handlerDeleteCard() {
@@ -37,7 +29,7 @@ class Card {
   _setEventListeners() {
     this._element.querySelector('.place__trash').addEventListener('click', () => {this._handlerDeleteCard(event)});
     this._element.querySelector('.place__select').addEventListener('click', () => {this._handlerSelectCard(event)});
-    this._element.querySelector('.place__image').addEventListener('click', () => {this._openFullScreen()});
+    this._element.querySelector('.place__image').addEventListener('click', () => {this._handleCardClick()});
   };
 
   generateCard() {
@@ -50,5 +42,3 @@ class Card {
     return this._element;
   };
 };
-
-export {Card};
