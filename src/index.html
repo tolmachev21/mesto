@@ -4,17 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Места России</title>
-  <link rel="stylesheet" href="pages/index.css">
 </head>
 
 <body class="page">
     <header class="header">
-        <img class="header__logo" src="images/Vector.svg" alt="Логотип проекта Место">
+        <img class="header__logo" src="<%=require('./images/Vector.svg')%>" alt="Логотип проекта Место">
     </header>
 
     <main class="main">
         <section class="profile">
-            <img class="profile__avatar" src="images/Avatar.svg" alt="Автар профиля">
+            <img class="profile__avatar" src="<%=require('./images/Avatar.svg')%>" alt="Автар профиля">
             <div class="profile__info">
                 <h1 class="profile__name">Жак-Ив Кусто</h1>
                 <button type="button" class="profile__edit-button" aria-label="Редактировать профиль"></button>
@@ -35,9 +34,9 @@
             <button class="popup__close-button" type="button" aria-label="Закрыть редактирование профиля"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
             <form class="popup__form" name="profile-form" novalidate>
-                <input class="popup__input popup__input_field_name" id="profile-name" type="text" name="profile-name" value="" placeholder="Введите имя" required minlength="2" maxlength="40">
+                <input class="popup__input popup__input_field_name" id="profile-name" type="text" name="user" value="" placeholder="Введите имя" required minlength="2" maxlength="40">
                 <span id="profile-name-error" class="popup__error"></span>
-                <input class="popup__input popup__input_field_job" id="profile-job" type="text" name="profile-job" value="" placeholder="Введите свою профессию" required minlength="2" maxlength="200">
+                <input class="popup__input popup__input_field_job" id="profile-job" type="text" name="job" value="" placeholder="Введите свою профессию" required minlength="2" maxlength="200">
                 <span id="profile-job-error" class="popup__error"></span>
                 <button class="popup__submit-button" type="submit">Сохранить</button>
             </form>
@@ -49,9 +48,9 @@
             <button class="popup__close-button" type="button" aria-label="Закрыть добавление картинки"></button>
             <h2 class="popup__title">Новое место</h2>
             <form class="popup__form" name="card-form" novalidate>
-                <input class="popup__input popup__input_field_place" id="card-place" type="text" name="card-place" value="" placeholder="Название" required minlength="2" maxlength="30">
+                <input class="popup__input popup__input_field_place" id="card-place" type="text" name="title" value="" placeholder="Название" required minlength="2" maxlength="30">
                 <span id="card-place-error" class="popup__error"></span>
-                <input class="popup__input popup__input_field_link" id="card-link" type="url" name="card-link" value="" placeholder="Ссылка на картинку" required>
+                <input class="popup__input popup__input_field_link" id="card-link" type="url" name="link" value="" placeholder="Ссылка на картинку" required>
                 <span id="card-link-error" class="popup__error"></span>
                 <button class="popup__submit-button" type="submit">Сохранить</button>
             </form>
@@ -61,22 +60,21 @@
     <div class="popup popup-fullscreen">
         <div class="popup__case">
             <button class="popup__close-button" type="button" aria-label="Закрыть открытую картинку"></button>
-            <img  class="popup__image" src="images" alt="Картинка на весь экран">
+            <img  class="popup__image" src="" alt="Картинка на весь экран">
             <p class="popup__subtitle"></p>
         </div>
     </div>
 
     <template class="template__item">
         <article class="place">
-            <img class="place__image" alt="">
+            <img class="place__image" src="" alt="">
             <button class="place__trash" type="button"  aria-label="Удалить"></button>
             <div class="place__caption"> 
                 <h3 class="place__title"></h3>
-                <img class="place__select" src="images/Vector-love.svg" alt="Положить в избранное">
+                <img class="place__select" src="<%=require('./images/Vector-love.svg')%>" alt="Положить в избранное">
             </div>    
         </article>
     </template>
 
-    <script type="module" src="./pages/index.js"></script>
 </body>
 </html>

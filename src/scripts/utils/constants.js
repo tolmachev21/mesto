@@ -4,18 +4,11 @@ const popupEditProfileOpenButtonElement = document.querySelector('.profile__edit
 const formEditProfileElement = popupEditProfileElement.querySelector('.popup__form');
 const profileNameElement = document.querySelector('.profile__name');
 const profileJobElement = document.querySelector('.profile__job');
-const inputNameElement = formEditProfileElement.querySelector('.popup__input_field_name');
-const inputJobElement = formEditProfileElement.querySelector('.popup__input_field_job');
 
 // Переменные для функций добавления карточек 
 const popupAddCardElement = document.querySelector('.popup-add-card');
 const popupAddCardOpenButtonElement = document.querySelector('.profile__add-button');
 const formAddCardElement = popupAddCardElement.querySelector('.popup__form');
-const inputPlaceElement = formAddCardElement.querySelector('.popup__input_field_place');
-const inputLinkElement = formAddCardElement.querySelector('.popup__input_field_link');
-
-// Переменные для функции создания карточек 
-const places = document.querySelector('.places');
 
 // Переменные для функции полноэкранного просмотра картинок
 const popupFullScreenElement = document.querySelector('.popup-fullscreen');
@@ -30,34 +23,41 @@ const ValidationConfig = {
   invalidButtonClass: 'popup__submit-button_state_invalid',
   validButtonClass: 'popup__submit-button_state_valid',
   inputErrorClass: 'popup__input_type_error'
-}; 
+};
+
+const arkhyz = new URL('https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg', import.meta.url)
+const chelyabinskRegion = new URL('https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg', import.meta.url)
+const ivanova = new URL('https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg', import.meta.url)
+const kamchatka = new URL('https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg', import.meta.url)
+const kholmogorskyDistrict = new URL('https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg', import.meta.url)
+const baikal = new URL('https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg', import.meta.url)
 
 
 // Массив с первоначальными картинками 
 const initialCards = [
   {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    title: 'Архыз',
+    link: arkhyz
   },
   {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    title: 'Челябинская область',
+    link: chelyabinskRegion
   },
   {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    title: 'Иваново',
+    link: ivanova
   },
   {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    title: 'Камчатка',
+    link: kamchatka
   },
   {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    title: 'Холмогорский район',
+    link: kholmogorskyDistrict
   },
   {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    title: 'Байкал',
+    link: baikal
   }
 ];
 
@@ -67,14 +67,9 @@ export {popupEditProfileElement,
         formEditProfileElement, 
         profileNameElement,
         profileJobElement,
-        inputNameElement,
-        inputJobElement,
         popupAddCardElement,
         popupAddCardOpenButtonElement,  
         formAddCardElement,
-        inputPlaceElement,
-        inputLinkElement,
-        places,
         popupFullScreenElement, 
         popupFullScreenImageElement, 
         popupFullScreenTitleElement,
