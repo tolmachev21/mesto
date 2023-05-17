@@ -1,17 +1,16 @@
 import Popup from './Popup.js';
-import {popupFullScreenImageElement, popupFullScreenTitleElement} from '../utils/constants.js';
 
 export default class PopupWithImage extends Popup {
-	constructor(data, popupSelector) {
-		super(popupSelector);
-		this._title = data.name;
-		this._image = data.link;
+	constructor(popup) {
+		super(popup);
+		this._imageElement = this._popup.querySelector('.popup__image');
+		this._imageSubtitle = this._popup.querySelector('.popup__subtitle');
 	};
 	
-	open() {
+	open(data) {
 		super.open();
-		popupFullScreenImageElement.src = this._image;
-		popupFullScreenImageElement.alt = this._title;
-		popupFullScreenTitleElement.textContent = this._title;
+		this._imageElement.src = data.link;
+		this._imageElement.alt = `Изображение ${data.title}`;
+		this._imageSubtitle.textContent = data.title;
 	};
 };

@@ -21,23 +21,26 @@ export default class Card {
     this._element = null;
   };
 
-  _handlerSelectCard(event) {
-    const select = event.target;
-    select.classList.toggle('place__select_active');
+  _handlerSelectCard() {
+    this._selectElement.classList.toggle('place__select_active');
   };
 
   _setEventListeners() {
-    this._element.querySelector('.place__trash').addEventListener('click', () => {this._handlerDeleteCard(event)});
-    this._element.querySelector('.place__select').addEventListener('click', () => {this._handlerSelectCard(event)});
-    this._element.querySelector('.place__image').addEventListener('click', () => {this._handleCardClick()});
+    this._trashElement = this._element.querySelector('.place__trash');
+    this._selectElement = this._element.querySelector('.place__select');
+    this._imageElement = this._element.querySelector('.place__image');
+    this._titleElement = this._element.querySelector('.place__title')
+    this._trashElement.addEventListener('click', () => {this._handlerDeleteCard()});
+    this._selectElement.addEventListener('click', () => {this._handlerSelectCard()});
+    this._imageElement.addEventListener('click', () => {this._handleCardClick()});
   };
 
   generateCard() {
     this._element = this._getTemplate();
     this._setEventListeners();
 
-    this._element.querySelector('.place__title').textContent = this._title;
-    this._element.querySelector('.place__image').src = this._image;
+    this._titleElement.textContent = this._title;
+    this._imageElement.src = this._image;
 
     return this._element;
   };

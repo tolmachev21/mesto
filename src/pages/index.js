@@ -24,13 +24,13 @@ const addCardFormValidator = new FormValidator(ValidationConfig, formAddCardElem
 profileEditFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 
+//
+const openingFullScreenImage = new PopupWithImage(popupFullScreenElement);
+openingFullScreenImage.setEventListeners();
+
 // 
 function createCard(card) {
-  const cardElement = new Card(card, '.template__item', () => {
-    const clickCard = new PopupWithImage(card, popupFullScreenElement);
-    clickCard.open();
-    clickCard.setEventListeners();
-  });
+  const cardElement = new Card(card, '.template__item', () => {openingFullScreenImage.open(card)});
   return cardElement.generateCard();
 };
 
@@ -54,19 +54,17 @@ const userInfo = new UserInfo({userNameSelector: profileNameElement, userJobSele
 const popupProfile = new PopupWithForm(popupEditProfileElement, (data) => {
     userInfo.setUserInfo(data);
   });
-
 popupProfile.setEventListeners();
 
 // 
 const popupCard = new PopupWithForm(popupAddCardElement, (data) => {
   renderingElement.addItem(createCard(data));
 });
-
 popupCard.setEventListeners();
 
 // Слушатели на открытие попапов
 popupEditProfileOpenButtonElement.addEventListener('click', () => {
-  userInfo.getUserInfo();
+  popupProfile.setInputValues(userInfo.getUserInfo());
   popupProfile.open();
 });
 

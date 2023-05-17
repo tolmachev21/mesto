@@ -12,8 +12,6 @@ const formAddCardElement = popupAddCardElement.querySelector('.popup__form');
 
 // Переменные для функции полноэкранного просмотра картинок
 const popupFullScreenElement = document.querySelector('.popup-fullscreen');
-const popupFullScreenImageElement = popupFullScreenElement.querySelector('.popup__image');
-const popupFullScreenTitleElement = popupFullScreenElement.querySelector('.popup__subtitle');
 
 // 
 const ValidationConfig = {
@@ -70,8 +68,6 @@ export {popupEditProfileElement,
         popupAddCardElement,
         popupAddCardOpenButtonElement,  
         formAddCardElement,
-        popupFullScreenElement, 
-        popupFullScreenImageElement, 
-        popupFullScreenTitleElement,
+        popupFullScreenElement,
         ValidationConfig,
         initialCards};
