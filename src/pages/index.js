@@ -37,6 +37,7 @@ const openingFullScreenImage = new PopupWithImage(popupFullScreenElement);
 openingFullScreenImage.setEventListeners();
 
 const openingDeleteCard = new PopupDeleteCard(popupDeleteCardElement, ({card, cardId}) => {
+  openingDeleteCard.renderLoading();
   api.deleteCard(cardId)
     .then(() => {
       card.removeCard();
@@ -55,11 +56,13 @@ function createCard(card) {
         .then(res => {
           cardElement.toggleLike(res.likes)
         })
+        .catch((error) => {`Ошибка при удалении лайка ${error}`})
     } else {
       api.addLikeCard(cardId)
         .then(res => {
           cardElement.toggleLike(res.likes)
         })
+        .catch((error) => {`Ошибка при добавлении лайка ${error}`})
     }
   });
   return cardElement.generateCard();
@@ -76,6 +79,7 @@ const userInfo = new UserInfo({userNameSelector: profileNameElement, userJobSele
 
 // 
 const popupProfile = new PopupWithForm(popupEditProfileElement, (data) => {
+  popupProfile.renderLoading();
   api.editUserInfo(data)
     .then((res) => {
       userInfo.setUserInfo({user: res.name, job: res.about, avatar: res.avatar})
@@ -88,6 +92,7 @@ popupProfile.setEventListeners();
 
 // 
 const popupCard = new PopupWithForm(popupAddCardElement, (data) => {
+  popupCard.renderLoading();
   Promise.all([api.getUserInfo(), api.addNewCard(data)])
     .then(([dataUser, dataCard]) => {
       dataCard.ownId = dataUser._id;
@@ -100,6 +105,7 @@ const popupCard = new PopupWithForm(popupAddCardElement, (data) => {
 popupCard.setEventListeners();
 
 const popupAvatar = new PopupWithForm(popupEditAvatarElement, (data) => {
+  popupAvatar.renderLoading();
   api.editUserAvatar(data)
     .then((res) => {
       userInfo.setUserInfo({user: res.name, job: res.about, avatar: res.avatar});
@@ -130,3 +136,4 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     userInfo.setUserInfo({user: dataUser.name, job: dataUser.about, avatar: dataUser.avatar});
     section.renderItems(dataCard);
   })
+  .catch((error) => {`Ошибка при отрисовке карточек ${error}`})
