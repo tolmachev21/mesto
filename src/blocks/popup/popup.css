@@ -12,4 +12,5 @@
     opacity: 0;
     visibility: hidden;
     background: rgba(0,0,0,0);
+    z-index: 2;
 }
